@@ -10,18 +10,133 @@ Se almacena la información del usuario en la base de datos.
 Se envía un correo de confirmación al usuario.
 Salidas: Mensaje de éxito en pantalla y correo de confirmación. Mensaje de error si la validación falla.
 -->
-<script>
 
-</script>
 
-<html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Registro de Usuario</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f2f2f2;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+    form {
+      background: white;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0px 0px 10px #aaa;
+      width: 320px;
+    }
+    input, button {
+      width: 100%;
+      padding: 10px;
+      margin: 5px 0;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+    }
+    button {
+      background: #4CAF50;
+      color: white;
+      border: none;
+      cursor: pointer;
+    }
+    button:hover {
+      background: #45a049;
+    }
+    .error {
+      color: red;
+      font-size: 0.9em;
+    }
+    .success {
+      color: green;
+      font-size: 0.9em;
+    }
+  </style>
+</head>
+<body>
+  <form id="registroForm">
+    <h2>Registro de Usuario</h2>
 
-    <header>
+    <label for="username">Nombre de usuario:</label>
+    <input type="text" id="username" required>
 
-    </header>
+    <label for="email">Correo electrónico:</label>
+    <input type="email" id="email" required>
 
-    <body>
-        
-    </body>
+    <label for="password">Contraseña:</label>
+    <input type="password" id="password" required>
 
+    <button type="submit">Registrarse</button>
+    <p id="mensaje"></p>
+  </form>
+
+  <script>
+    const form = document.getElementById("registroForm");
+    const mensaje = document.getElementById("mensaje");
+
+    // Simulación de "base de datos" en memoria
+    const usuariosRegistrados = [];
+
+    form.addEventListener("submit", function(event) {
+      event.preventDefault(); 
+
+      const username = document.getElementById("username").value.trim();
+      const email = document.getElementById("email").value.trim();
+      const password = document.getElementById("password").value.trim();
+
+      // Validar campos vacíos
+      if (!username || !email || !password) {
+        mensaje.textContent = "⚠️ Todos los campos son obligatorios.";
+        mensaje.className = "error";
+        return;
+      }
+
+      // Validar si correo ya existe
+      if (usuariosRegistrados.some(user => user.email === email)) {
+        mensaje.textContent = "⚠️ El correo ya está registrado.";
+        mensaje.className = "error";
+        return;
+      }
+
+      // Validar contraseña (mínimo 8 caracteres, 1 número y 1 carácter especial)
+      const regexPassword = /^(?=.*[0-9])(?=.*[!@#$%^&*]).{8,}$/;
+      if (!regexPassword.test(password)) {
+        mensaje.textContent = "⚠️ La contraseña debe tener al menos 8 caracteres, un número y un carácter especial.";
+        mensaje.className = "error";
+        return;
+      }
+
+      // Guardar usuario (simulación)
+      usuariosRegistrados.push({ username, email, password });
+
+      // Mensaje en pantalla
+      mensaje.textContent = "✅ Registro exitoso. Se envió un correo de confirmación.";
+      mensaje.className = "success";
+
+      // Aquí deberías enviar al servidor (backend real)
+      /*
+      fetch("http://tu-servidor.com/api/registro", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ username, email, password })
+      })
+      .then(res => res.json())
+      .then(data => {
+        if(data.success){
+          mensaje.textContent = "✅ Registro exitoso. Se envió un correo de confirmación.";
+          mensaje.className = "success";
+        } else {
+          mensaje.textContent = "⚠️ " + data.error;
+          mensaje.className = "error";
+        }
+      });
+      */
+    });
+  </script>
+</body>
 </html>
