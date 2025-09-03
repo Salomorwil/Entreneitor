@@ -8,13 +8,13 @@ body {
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
 }
 
-.main-header {
+.entreneitor-header {
     background: white;
     padding: 1rem 2rem;
     box-shadow: 0 2px 4px rgba(0,0,0,0.1);
 }
 
-.nav-container {
+.entreneitor-nav {
     max-width: 1200px;
     margin: 0 auto;
     display: flex;
@@ -22,46 +22,46 @@ body {
     align-items: center;
 }
 
-.brand {
+.entreneitor-brand {
     font-size: 1.5rem;
     font-weight: bold;
 }
 
-.brand a {
+.entreneitor-brand a {
     color: #000;
     text-decoration: none;
 }
 
-.menu {
+.entreneitor-menu {
     list-style: none;
     display: flex;
     align-items: center;
     gap: 2rem;
 }
 
-.nav-link {
+.entreneitor-nav-link {
     text-decoration: none;
     color: #4a4a4a;
     font-size: 1rem;
     transition: color 0.3s ease;
 }
 
-.nav-link:hover {
+.entreneitor-nav-link:hover {
     color: #000;
 }
 
-.login {
+.entreneitor-login {
     color: #4a4a4a;
 }
 
-.register {
+.entreneitor-register {
     background-color: #000;
     color: white;
     padding: 0.5rem 1rem;
     border-radius: 4px;
 }
 
-.register:hover {
+.entreneitor-register:hover {
     background-color: #333;
     color: white;
 }
