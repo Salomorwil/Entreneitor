@@ -69,7 +69,7 @@ body {
 /* Estilos para el formulario de registro */
 .registro-container {
     font-family: Arial, sans-serif;
-    background: #f2f2f2;
+    background: #e9e4e4;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -78,7 +78,7 @@ body {
 }
 
 .registro-form {
-    background: white;
+    background: rgb(97, 92, 92);
     padding: 20px;
     border-radius: 10px;
     box-shadow: 0px 0px 10px #aaa;
@@ -113,7 +113,7 @@ body {
 
 .registro-form h2 {
     margin-bottom: 20px;
-    color: #333;
+    color: #eeeeee;
 }
 
 .mensaje-error {
@@ -127,3 +127,4 @@ body {
     font-size: 0.9em;
     margin-top: 10px;
 }
+
