@@ -9,7 +9,6 @@
     <title>Registro de Rutinas - Entreneitor</title>
 </head>
 <body class="bg-registro-rutinas">
-    <!-- Navbar -->
     <nav class="navbar navbar-expand-lg bg-white shadow-sm">
         <div class="container">
             <a class="navbar-brand fw-bold" href="index.html">Entreneitor</a>
@@ -36,10 +35,8 @@
         </div>
     </nav>
 
-    <!-- Contenido principal -->
     <div class="container mt-5">
         <div class="row">
-            <!-- Selector de rutina y día -->
             <div class="col-lg-4" id="selector-col">
                 <div class="card shadow-sm mb-4">
                     <div class="card-body">
@@ -84,7 +81,6 @@
                 </div>
             </div>
 
-            <!-- Área de ejercicios -->
             <div class="col-lg-8" id="ejercicios-col">
                 <div id="ejerciciosContainer">
                     <div class="alert alert-info">
@@ -95,7 +91,6 @@
         </div>
     </div>
 
-    <!-- Template para vista de tarjeta -->
     <template id="cardTemplate">
         <div class="card shadow-sm mb-4 exercise-card">
             <div class="card-body">
@@ -141,10 +136,8 @@
         </div>
     </template>
 
-    <!-- Scripts -->
     <script>
         document.addEventListener('DOMContentLoaded', () => {
-            // Datos incrustados
             const rutinasData = {
                 "rutinas": {
                     "Rutina Full Body": {
@@ -185,15 +178,12 @@
 2025-09-08,Bro Split,Dia 2,Remo con Barra,72.5,4,10,Forma perfecta
 2025-09-08,Bro Split,Dia 2,Curl de Bíceps,27.5,3,15,Bomba increíble`;
 
-            // Almacenamiento en memoria de los registros de la sesión actual
             const registrosSesion = new Map();
 
-            // Función para obtener las rutinas desde los datos incrustados
             function cargarRutinas() {
                 return rutinasData.rutinas;
             }
 
-            // Función para obtener el último registro desde los datos CSV incrustados
             function cargarUltimoRegistro(rutina, dia, ejercicio) {
                 try {
                     const rows = registrosCsvData.trim().split('\n').slice(1);
@@ -214,9 +204,6 @@
                 }
             }
             
-            // ... (el resto del código JavaScript permanece igual) ...
-            
-            // Función para guardar registro en memoria
             function guardarRegistro(rutina, dia, ejercicio, datos) {
                 const key = `${rutina}-${dia}-${ejercicio}`;
                 registrosSesion.set(key, {
@@ -226,7 +213,6 @@
                 });
             }
 
-            // Función para crear una tarjeta de ejercicio
             function crearTarjetaEjercicio(ejercicio, datosEjercicio, ultimoRegistro) {
                 const template = document.getElementById('cardTemplate');
                 const card = template.content.cloneNode(true);
@@ -285,7 +271,6 @@
                 return card;
             }
 
-            // Función para crear vista de tabla
             function crearVistaTabla(ejercicios, ultimosRegistros) {
                 const tableContainer = document.createElement('div');
                 tableContainer.className = 'card shadow-sm';
@@ -358,7 +343,6 @@
                 return tableContainer;
             }
 
-            // Inicializar formulario y listeners
             function inicializar() {
                 const rutinas = cargarRutinas();
                 const rutinaSelect = document.getElementById('rutinaSelect');

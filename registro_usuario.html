@@ -75,7 +75,6 @@
         const form = document.getElementById("registroForm");
         const mensaje = document.getElementById("mensaje");
 
-        // Simulación de "base de datos" en memoria
         const usuariosRegistrados = [];
 
         form.addEventListener("submit", function(event) {
@@ -85,17 +84,15 @@
             const email = document.getElementById("email").value.trim();
             const password = document.getElementById("password").value.trim();
 
-            // Validar campos vacíos
             if (!username || !email || !password) {
-                mensaje.textContent = "⚠️ Todos los campos son obligatorios.";
+                mensaje.textContent = "Todos los campos son obligatorios.";
                 mensaje.className = "text-danger";
                 return;
             }
 
-            // Validar contraseña (mínimo 8 caracteres, 1 número y 1 carácter especial)
             const regexPassword = /^(?=.*[0-9])(?=.*[!@#$%^&*]).{8,}$/;
             if (!regexPassword.test(password)) {
-                mensaje.textContent = "⚠️ La contraseña debe tener al menos 8 caracteres, un número y un carácter especial.";
+                mensaje.textContent = "La contraseña debe tener al menos 8 caracteres, un número y un carácter especial.";
                 mensaje.className = "text-danger";
                 return;
             }
@@ -104,7 +101,7 @@
             usuariosRegistrados.push({ username, email, password });
 
             // Mensaje en pantalla
-            mensaje.textContent = "✅ Registro exitoso.";
+            mensaje.textContent = "Registro exitoso.";
             mensaje.className = "text-success";
         });
     </script>
