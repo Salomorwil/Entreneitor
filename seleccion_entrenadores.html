@@ -85,21 +85,21 @@
                     nombre: "Ana López",
                     especialidad: "Yoga y Flexibilidad",
                     rating: 5,
-                    costo: 45,
+                    costo: 39990,
                     img: "https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?w=500&q=80"
                 },
                 {
                     nombre: "Carlos Martínez",
                     especialidad: "Culturismo y Fuerza",
                     rating: 4,
-                    costo: 60,
+                    costo: 50000,
                     img: "https://images.unsplash.com/photo-1581009146145-b5ef050c2e1e?w=500&q=80"
                 },
                 {
                     nombre: "Sofía García",
                     especialidad: "Cardio y Resistencia",
                     rating: 5,
-                    costo: 50,
+                    costo: 48000,
                     img: "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=500&q=80"
                 }
             ];
@@ -121,7 +121,7 @@
                                         <h3 class="card-title">${entrenador.nombre}</h3>
                                         <p class="card-text text-muted">${entrenador.especialidad}</p>
                                         <div class="star-rating mb-3">${stars}</div>
-                                        <h4 class="card-text mb-4">$${entrenador.costo} / sesión</h4>
+                                        <h4 class="card-text mb-4">CLP $${entrenador.costo.toLocaleString('es-CL')} / sesión</h4>
                                         <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#agendarModal" data-nombre="${entrenador.nombre}">
                                             <i class="bi bi-calendar-plus"></i> Agendar Sesión
                                         </button>

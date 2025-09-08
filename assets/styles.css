@@ -27,3 +27,28 @@
 .star-rating {
     color: #ffc107;
 }
+
+/* Estilos para el Homepage (index.html) */
+.hero-section {
+    background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('img/entrenador_index.jpg') no-repeat center center;
+    background-size: cover;
+    padding: 10rem 0;
+    margin-bottom: 0;
+}
+
+.feature-icon {
+    font-size: 3rem;
+    color: #0d6efd;
+}
+
+.footer {
+    background-color: #343a40;
+    color: white;
+}
+.footer a {
+    color: #adb5bd;
+    text-decoration: none;
+}
+.footer a:hover {
+    color: white;
+}

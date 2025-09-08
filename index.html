@@ -1,63 +1,107 @@
 <!DOCTYPE html>
-<html>
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="stylesheet" href="assets/styles.css">
-        <title>Entreneitor</title>
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-LN+7fdVzj6u52u30Kp6M/trliBMCMKTyK833zpbD+pXdCLuTusPj697FH4R/5mcr" crossorigin="anonymous">
-    </head>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Entreneitor - Tu Compañero de Fitness</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="assets/styles.css">
+</head>
+<body class="bg-light">
 
-    <body>
-        <nav class="navbar navbar-expand-lg bg-white shadow-sm">
-            <div class="container">
-                <a class="navbar-brand fw-bold" href="index.html">Entreneitor</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="collapse navbar-collapse" id="navbarNav">
-                    <ul class="navbar-nav me-auto">
-                        <li class="nav-item">
-                            <a class="nav-link" href="creador_rutinas.html">Generador de rutinas</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="registro_rutinas.html">Seguimiento de rutinas</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="seleccion_entrenadores.html">Entrenadores</a>
-                        </li>
-                    </ul>
-                    <div class="d-flex gap-2">
-                        <a href="registro_usuario.html" class="btn btn-outline-dark">Iniciar sesión</a>
-                        <a href="registro_usuario.html" class="btn btn-dark">Regístrate</a>
+    <nav class="navbar navbar-expand-lg bg-white shadow-sm sticky-top">
+        <div class="container">
+            <a class="navbar-brand fw-bold" href="index.html">Entreneitor</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav me-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="creador_rutinas.html">Generador de rutinas</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="registro_rutinas.html">Seguimiento de rutinas</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="seleccion_entrenadores.html">Entrenadores</a>
+                    </li>
+                </ul>
+                <div class="d-flex gap-2">
+                    <a href="registro_usuario.html" class="btn btn-outline-primary">Iniciar sesión</a>
+                    <a href="registro_usuario.html" class="btn btn-primary">Regístrate</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <header class="hero-section text-white text-center">
+        <div class="container">
+            <h1 class="display-3 fw-bold">Alcanza tus Metas, Transforma tu Vida</h1>
+            <p class="lead my-4">La plataforma todo-en-uno para crear rutinas, seguir tu progreso y conectar con los mejores entrenadores.</p>
+            <a href="registro_usuario.html" class="btn btn-primary btn-lg">Empieza Ahora</a>
+        </div>
+    </header>
+
+    <!-- Features Section -->
+    <section class="py-5">
+        <div class="container">
+            <div class="row text-center g-4">
+                <div class="col-md-4">
+                    <div class="card h-100 shadow-sm border-0 p-4">
+                        <i class="bi bi-clipboard-data feature-icon mb-3"></i>
+                        <h3 class="h4">Crea tus Rutinas</h3>
+                        <p>Diseña planes de entrenamiento personalizados o elige entre plantillas creadas por expertos.</p>
+                        <a href="creador_rutinas.html" class="btn btn-outline-primary mt-auto">Ir al Creador</a>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card h-100 shadow-sm border-0 p-4">
+                        <i class="bi bi-bar-chart-line feature-icon mb-3"></i>
+                        <h3 class="h4">Registra tu Progreso</h3>
+                        <p>Anota tus pesos, series y repeticiones. Visualiza tu evolución con gráficos y estadísticas claras.</p>
+                        <a href="registro_rutinas.html" class="btn btn-outline-primary mt-auto">Ir al Seguimiento</a>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card h-100 shadow-sm border-0 p-4">
+                        <i class="bi bi-person-check feature-icon mb-3"></i>
+                        <h3 class="h4">Encuentra tu Entrenador</h3>
+                        <p>Conecta con entrenadores certificados que te guiarán para alcanzar tu máximo potencial.</p>
+                        <a href="seleccion_entrenadores.html" class="btn btn-outline-primary mt-auto">Ver Entrenadores</a>
                     </div>
                 </div>
             </div>
-        </nav>
-        <div class="row justify-content-center">
-                <div class="col-sm-8">
-                    <div id="carouselExampleAutoplaying" class="carousel slide" data-bs-ride="carousel">
-                        <div class="carousel-inner">
-                            <div class="carousel-item active">
-                            <img src="assets/img/entrenador_index.jpg" class="d-block w-100" alt="...">
-                            </div>
-                        </div>
-                            <div class="carousel-inner">
-                            <div class="carousel-item">
-                            <img src="assets/img/ejercicios_index.avif" class="d-block w-100" alt="...">
-                            </div>
-                        </div>
-                        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleAutoplaying" data-bs-slide="prev">
-                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                            <span class="visually-hidden">Previous</span>
-                        </button>
-                        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleAutoplaying" data-bs-slide="next">
-                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                            <span class="visually-hidden">Next</span>
-                        </button>
-                    </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section class="py-5 bg-white">
+        <div class="container">
+            <h2 class="text-center mb-5">Lo que dicen nuestros usuarios</h2>
+            <div class="row">
+                <div class="col-md-6 mx-auto text-center">
+                    <p class="fst-italic">"Entreneitor cambió mi forma de entrenar. La facilidad para registrar mi progreso me mantiene motivado cada día. ¡Totalmente recomendado!"</p>
+                    <p class="fw-bold">- Alex Gómez</p>
                 </div>
             </div>
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js" integrity="sha384-q8RN0h2i4QAwW4Tl/YV4i7QyDEv4DQXM0U6c6CA3L8JU0pt91MjR5BpgO9L8F6PN" crossorigin="anonymous"></script>
-    </body>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer py-4">
+        <div class="container text-center">
+            <p class="mb-0">&copy; 2025 Entreneitor. Todos los derechos reservados.</p>
+            <div class="mt-2">
+                <a href="#" class="mx-2"><i class="bi bi-twitter"></i></a>
+                <a href="#" class="mx-2"><i class="bi bi-instagram"></i></a>
+                <a href="#" class="mx-2"><i class="bi bi-facebook"></i></a>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js"></script>
+</body>
 </html>
