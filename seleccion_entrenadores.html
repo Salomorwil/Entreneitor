@@ -1,34 +1,33 @@
 <!DOCTYPE html>
-<!--
-ID del Requerimiento: RF-004
-Descripción: El sistema debe mostrar una página con una lista de los entrenadores disponibles. Cada entrenador debe tener un perfil visible con su información, especialidades, calificaciones y reseñas de otros usuarios.
-Entradas: (Opcional) Filtros de búsqueda (especialidad, valoración, etc.).
-Proceso:
-El usuario accede a la sección "Entrenadores".
-El sistema consulta la base de datos y obtiene la lista de todos los entrenadores activos.
-El sistema muestra la lista de entrenadores con información clave (foto, nombre, calificación promedio).
-El usuario puede hacer clic en un entrenador para ver su perfil detallado.
-Salidas: Una lista/galería de perfiles de entrenadores.
--->
-<script>
-
-</script>
-
-<html>
-
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="stylesheet" href="assets/styles.css">
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-LN+7fdVzj6u52u30Kp6M/trliBMCMKTyK833zpbD+pXdCLuTusPj697FH4R/5mcr" crossorigin="anonymous">
-        <title>Entreneitor</title>
-    </head>
-
-    <body>
-        <nav class="navbar navbar-expand-lg bg-white shadow-sm">
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="assets/styles.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    <title>Selección de Entrenadores - Entreneitor</title>
+    <style>
+        .carousel-item {
+            padding: 2rem 4rem;
+        }
+        .card {
+            border: none;
+            transition: transform 0.3s;
+        }
+        .card:hover {
+            transform: translateY(-10px);
+        }
+        .star-rating {
+            color: #ffc107;
+        }
+    </style>
+</head>
+<body class="bg-light">
+    <nav class="navbar navbar-expand-lg bg-white shadow-sm">
         <div class="container">
             <a class="navbar-brand fw-bold" href="index.html">Entreneitor</a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
@@ -40,7 +39,7 @@ Salidas: Una lista/galería de perfiles de entrenadores.
                         <a class="nav-link" href="registro_rutinas.html">Seguimiento de rutinas</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="seleccion_entrenadores.html">Entrenadores</a>
+                        <a class="nav-link active" href="seleccion_entrenadores.html">Entrenadores</a>
                     </li>
                 </ul>
                 <div class="d-flex gap-2">
@@ -50,6 +49,128 @@ Salidas: Una lista/galería de perfiles de entrenadores.
             </div>
         </div>
     </nav>
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js" integrity="sha384-q8RN0h2i4QAwW4Tl/YV4i7QyDEv4DQXM0U6c6CA3L8JU0pt91MjR5BpgO9L8F6PN" crossorigin="anonymous"></script>
-    </body>
+
+    <div class="container mt-5">
+        <h1 class="text-center mb-5">Conoce a Nuestros Entrenadores</h1>
+        <div id="entrenadoresCarousel" class="carousel slide" data-bs-ride="carousel">
+            <div class="carousel-inner" id="carousel-inner-container">
+                <!-- Las tarjetas de entrenadores se insertarán aquí -->
+            </div>
+            <button class="carousel-control-prev" type="button" data-bs-target="#entrenadoresCarousel" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#entrenadoresCarousel" data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Next</span>
+            </button>
+        </div>
+    </div>
+
+    <!-- Modal para Agendar Cita -->
+    <div class="modal fade" id="agendarModal" tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="modalTitle">Agendar Cita con </h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <p>Selecciona una fecha y hora para tu sesión.</p>
+                    <input type="date" class="form-control mb-3" id="fechaCita">
+                    <select class="form-select" id="horaCita">
+                        <option>09:00 AM</option>
+                        <option>11:00 AM</option>
+                        <option>02:00 PM</option>
+                        <option>04:00 PM</option>
+                    </select>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                    <button type="button" class="btn btn-primary" id="confirmarCitaBtn">Confirmar Cita</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const entrenadores = [
+                {
+                    nombre: "Ana López",
+                    especialidad: "Yoga y Flexibilidad",
+                    rating: 5,
+                    costo: 45,
+                    img: "https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?w=500&q=80"
+                },
+                {
+                    nombre: "Carlos Martínez",
+                    especialidad: "Culturismo y Fuerza",
+                    rating: 4,
+                    costo: 60,
+                    img: "https://images.unsplash.com/photo-1581009146145-b5ef050c2e1e?w=500&q=80"
+                },
+                {
+                    nombre: "Sofía García",
+                    especialidad: "Cardio y Resistencia",
+                    rating: 5,
+                    costo: 50,
+                    img: "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=500&q=80"
+                }
+            ];
+
+            const carouselContainer = document.getElementById('carousel-inner-container');
+            entrenadores.forEach((entrenador, index) => {
+                const activeClass = index === 0 ? 'active' : '';
+                const stars = '⭐'.repeat(entrenador.rating) + '☆'.repeat(5 - entrenador.rating);
+                
+                const cardHTML = `
+                    <div class="carousel-item ${activeClass}">
+                        <div class="card shadow-sm">
+                            <div class="row g-0">
+                                <div class="col-md-4">
+                                    <img src="${entrenador.img}" class="img-fluid rounded-start" alt="${entrenador.nombre}">
+                                </div>
+                                <div class="col-md-8">
+                                    <div class="card-body">
+                                        <h3 class="card-title">${entrenador.nombre}</h3>
+                                        <p class="card-text text-muted">${entrenador.especialidad}</p>
+                                        <div class="star-rating mb-3">${stars}</div>
+                                        <h4 class="card-text mb-4">$${entrenador.costo} / sesión</h4>
+                                        <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#agendarModal" data-nombre="${entrenador.nombre}">
+                                            <i class="bi bi-calendar-plus"></i> Agendar Sesión
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                `;
+                carouselContainer.innerHTML += cardHTML;
+            });
+
+            const agendarModal = document.getElementById('agendarModal');
+            agendarModal.addEventListener('show.bs.modal', (event) => {
+                const button = event.relatedTarget;
+                const nombre = button.getAttribute('data-nombre');
+                const modalTitle = agendarModal.querySelector('.modal-title');
+                modalTitle.textContent = `Agendar Cita con ${nombre}`;
+            });
+
+            document.getElementById('confirmarCitaBtn').addEventListener('click', () => {
+                const fecha = document.getElementById('fechaCita').value;
+                const hora = document.getElementById('horaCita').value;
+                if (fecha) {
+                    alert(`¡Cita confirmada para el ${fecha} a las ${hora}!`);
+                    const modalInstance = bootstrap.Modal.getInstance(agendarModal);
+                    modalInstance.hide();
+                } else {
+                    alert('Por favor, selecciona una fecha.');
+                }
+            });
+        });
+    </script>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js"></script>
+</body>
 </html>

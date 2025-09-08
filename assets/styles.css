@@ -1,64 +1,15 @@
-/* Los estilos globales ya están manejados por Bootstrap */
-
-/* Estilos para el formulario de registro */
-.registro-container {
-    font-family: Arial, sans-serif;
-    background: #e9e4e4;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: calc(100vh - 70px); /* Restamos el alto del header */
-    padding: 20px;
+/* Estilos para el registro de rutinas */
+.completed {
+    background-color: #d4edda !important;
+    border-color: #c3e6cb !important;
 }
-
-.registro-form {
-    background: rgb(15, 15, 15);
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0px 0px 10px #aaa;
-    width: 320px;
+.exercise-card {
+    transition: all 0.3s ease;
 }
-
-.registro-form input,
-.registro-form button {
-    width: 100%;
-    padding: 10px;
-    margin: 5px 0;
-    border-radius: 5px;
-    border: 1px solid #ccc;
+.last-workout {
+    border-left: 4px solid #0d6efd;
 }
-
-.registro-form button {
-    background: #4CAF50;
-    color: white;
-    border: none;
-    cursor: pointer;
-    margin-top: 15px;
-}
-
-.registro-form button:hover {
-    background: #45a049;
-}
-
-.registro-form label {
-    display: block;
-    margin-top: 10px;
-}
-
-.registro-form h2 {
-    margin-bottom: 20px;
-    color: #333;
-}
-
-.mensaje-error {
-    color: red;
-    font-size: 0.9em;
-    margin-top: 10px;
-}
-
-.mensaje-success {
-    color: green;
-    font-size: 0.9em;
-    margin-top: 10px;
+.table-success {
+    background-color: #d1e7dd !important;
 }
 
