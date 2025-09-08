@@ -13,3 +13,17 @@
     background-color: #d1e7dd !important;
 }
 
+/* Estilos para la selección de entrenadores */
+.carousel-item {
+    padding: 2rem 4rem;
+}
+.card {
+    border: none;
+    transition: transform 0.3s;
+}
+.card:hover {
+    transform: translateY(-10px);
+}
+.star-rating {
+    color: #ffc107;
+}
