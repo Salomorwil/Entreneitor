@@ -28,6 +28,47 @@
     color: #ffc107;
 }
 
+/* Estilos para fondos de página temáticos */
+body[class*="bg-"] {
+    background-size: cover;
+    background-position: center center;
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+}
+
+.bg-creador {
+    background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('https://images.unsplash.com/photo-1574680096145-d05b474e2155?q=80&w=2069&auto=format&fit=crop');
+}
+
+.bg-registro-rutinas {
+    background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('https://images.unsplash.com/photo-1549060279-7e168fcee0c2?q=80&w=2070&auto=format&fit=crop');
+}
+
+.bg-entrenadores {
+    background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('https://images.unsplash.com/photo-1605296867304-46d5465a13f1?q=80&w=2070&auto=format&fit=crop');
+}
+
+.bg-registro-usuario {
+    background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('https://images.unsplash.com/photo-1517836357463-d25dfeac3438?q=80&w=2070&auto=format&fit=crop');
+}
+
+/* Ajuste para que los componentes resalten sobre el fondo */
+.card {
+    background-color: rgba(255, 255, 255, 0.95);
+}
+
+.navbar {
+    background-color: rgba(255, 255, 255, 0.98) !important;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    color: #343a40; /* Asegurar que los títulos sean oscuros y legibles */
+}
+
+.text-white h1, .text-white .lead {
+    color: white !important; /* Mantener blanco el texto del hero section */
+}
+
 /* Estilos para el Homepage (index.html) */
 .hero-section {
     background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('img/entrenador_index.jpg') no-repeat center center;
