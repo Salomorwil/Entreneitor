@@ -24,24 +24,36 @@ Salidas: Una reserva de sesión confirmada. Notificación por correo al usuario 
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="assets/styles.css">
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-LN+7fdVzj6u52u30Kp6M/trliBMCMKTyK833zpbD+pXdCLuTusPj697FH4R/5mcr" crossorigin="anonymous">
         <title>Entreneitor</title>
     </head>
 
     <body>
-        <header class="entreneitor-header">
-            <nav class="entreneitor-nav">
-                <div class="entreneitor-brand">
-                    <a href="index.html">Entreneitor</a>
-                </div>
-                <ul class="entreneitor-menu">
-                    <li><a href="creador_rutinas.html" class="entreneitor-nav-link">Generador de rutinas</a></li>
-                    <li><a href="registro_rutinas.html" class="entreneitor-nav-link">Seguimiento de rutinas</a></li>
-                    <li><a href="seleccion_entrenadores.html" class="entreneitor-nav-link">Entrenadores</a></li>
-                    <li><a href="registro_usuario.html" class="entreneitor-nav-link entreneitor-login">Iniciar sesión</a></li>
-                    <li><a href="registro_usuario.html" class="entreneitor-nav-link entreneitor-register">Regístrate</a></li>
+        <nav class="navbar navbar-expand-lg bg-white shadow-sm">
+        <div class="container">
+            <a class="navbar-brand fw-bold" href="index.html">Entreneitor</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav me-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="creador_rutinas.html">Generador de rutinas</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="registro_rutinas.html">Seguimiento de rutinas</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="seleccion_entrenadores.html">Entrenadores</a>
+                    </li>
                 </ul>
-            </nav>
-        </header>
+                <div class="d-flex gap-2">
+                    <a href="registro_usuario.html" class="btn btn-outline-dark">Iniciar sesión</a>
+                    <a href="registro_usuario.html" class="btn btn-dark">Regístrate</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js" integrity="sha384-q8RN0h2i4QAwW4Tl/YV4i7QyDEv4DQXM0U6c6CA3L8JU0pt91MjR5BpgO9L8F6PN" crossorigin="anonymous"></script>
     </body>
-
 </html>

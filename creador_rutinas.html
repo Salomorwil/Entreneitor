@@ -25,24 +25,151 @@ Salidas: Una nueva rutina de entrenamiento guardada y visible en el perfil del u
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="assets/styles.css">
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-LN+7fdVzj6u52u30Kp6M/trliBMCMKTyK833zpbD+pXdCLuTusPj697FH4R/5mcr" crossorigin="anonymous">
         <title>Entreneitor</title>
     </head>
 
-    <body>
-        <header class="entreneitor-header">
-            <nav class="entreneitor-nav">
-                <div class="entreneitor-brand">
-                    <a href="index.html">Entreneitor</a>
+    <body class="bg-light">
+        <nav class="navbar navbar-expand-lg bg-white shadow-sm">
+            <div class="container">
+                <a class="navbar-brand fw-bold" href="index.html">Entreneitor</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav me-auto">
+                        <li class="nav-item">
+                            <a class="nav-link" href="creador_rutinas.html">Generador de rutinas</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="registro_rutinas.html">Seguimiento de rutinas</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="seleccion_entrenadores.html">Entrenadores</a>
+                        </li>
+                    </ul>
+                    <div class="d-flex gap-2">
+                        <a href="registro_usuario.html" class="btn btn-outline-dark">Iniciar sesión</a>
+                        <a href="registro_usuario.html" class="btn btn-dark">Regístrate</a>
+                    </div>
                 </div>
-                <ul class="entreneitor-menu">
-                    <li><a href="creador_rutinas.html" class="entreneitor-nav-link">Generador de rutinas</a></li>
-                    <li><a href="registro_rutinas.html" class="entreneitor-nav-link">Seguimiento de rutinas</a></li>
-                    <li><a href="seleccion_entrenadores.html" class="entreneitor-nav-link">Entrenadores</a></li>
-                    <li><a href="registro_usuario.html" class="entreneitor-nav-link entreneitor-login">Iniciar sesión</a></li>
-                    <li><a href="registro_usuario.html" class="entreneitor-nav-link entreneitor-register">Regístrate</a></li>
-                </ul>
-            </nav>
-        </header>
-    </body>
+            </div>
+        </nav>
 
+        <div class="container mt-5">
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="card shadow-sm">
+                        <div class="card-body">
+                            <h2 class="card-title mb-4">Crear Rutina</h2>
+                            <form id="rutinaForm">
+                                <div class="mb-3">
+                                    <label for="nombreRutina" class="form-label">Nombre de la Rutina</label>
+                                    <input type="text" class="form-control" id="nombreRutina" required>
+                                </div>
+
+                                <div class="mb-3">
+                                    <label for="ejercicioSelect" class="form-label">Seleccionar Ejercicio</label>
+                                    <select class="form-select mb-2" id="ejercicioSelect">
+                                        <option value="">-- Seleccionar ejercicio predefinido --</option>
+                                        <option value="Press de Banca">Press de Banca</option>
+                                        <option value="Sentadillas">Sentadillas</option>
+                                        <option value="Peso Muerto">Peso Muerto</option>
+                                        <option value="Dominadas">Dominadas</option>
+                                        <option value="Curl de Bíceps">Curl de Bíceps</option>
+                                        <option value="Press Militar">Press Militar</option>
+                                        <option value="Remo con Barra">Remo con Barra</option>
+                                        <option value="Fondos en Paralelas">Fondos en Paralelas</option>
+                                    </select>
+                                </div>
+
+                                <div class="mb-3">
+                                    <label for="ejercicioCustom" class="form-label">O Agregar Ejercicio Personalizado</label>
+                                    <input type="text" class="form-control" id="ejercicioCustom" placeholder="Nombre del ejercicio">
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-md-4 mb-3">
+                                        <label for="series" class="form-label">Series</label>
+                                        <input type="number" class="form-control" id="series" min="1" value="3">
+                                    </div>
+                                    <div class="col-md-4 mb-3">
+                                        <label for="repeticiones" class="form-label">Repeticiones</label>
+                                        <input type="number" class="form-control" id="repeticiones" min="1" value="12">
+                                    </div>
+                                    <div class="col-md-4 mb-3">
+                                        <label for="descanso" class="form-label">Descanso (seg)</label>
+                                        <input type="number" class="form-control" id="descanso" min="0" value="60">
+                                    </div>
+                                </div>
+
+                                <div class="d-grid">
+                                    <button type="submit" class="btn btn-dark">Agregar Ejercicio</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-6">
+                    <div class="card shadow-sm">
+                        <div class="card-body">
+                            <h3 class="card-title mb-4">Ejercicios Agregados</h3>
+                            <ul id="listaEjercicios" class="list-group">
+                                <!-- Los ejercicios se agregarán aquí -->
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <script>
+            const form = document.getElementById('rutinaForm');
+            const ejercicioSelect = document.getElementById('ejercicioSelect');
+            const ejercicioCustom = document.getElementById('ejercicioCustom');
+            const listaEjercicios = document.getElementById('listaEjercicios');
+            
+            form.addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                // Obtener el ejercicio (ya sea del select o del input personalizado)
+                let ejercicio = ejercicioSelect.value;
+                if (!ejercicio && ejercicioCustom.value) {
+                    ejercicio = ejercicioCustom.value;
+                }
+                
+                if (!ejercicio) {
+                    alert('Por favor, selecciona o ingresa un ejercicio');
+                    return;
+                }
+                
+                // Obtener los valores de series, repeticiones y descanso
+                const series = document.getElementById('series').value;
+                const repeticiones = document.getElementById('repeticiones').value;
+                const descanso = document.getElementById('descanso').value;
+                
+                // Crear el elemento de la lista
+                const li = document.createElement('li');
+                li.className = 'list-group-item d-flex justify-content-between align-items-center';
+                li.innerHTML = `
+                    <div>
+                        <strong>${ejercicio}</strong>
+                        <br>
+                        <small class="text-muted">${series} series × ${repeticiones} repeticiones | Descanso: ${descanso}s</small>
+                    </div>
+                    <button type="button" class="btn btn-danger btn-sm" onclick="this.parentElement.remove()">×</button>
+                `;
+                
+                // Agregar el ejercicio a la lista
+                listaEjercicios.appendChild(li);
+                
+                // Limpiar los campos
+                ejercicioSelect.value = '';
+                ejercicioCustom.value = '';
+            });
+        </script>
+
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js" integrity="sha384-q8RN0h2i4QAwW4Tl/YV4i7QyDEv4DQXM0U6c6CA3L8JU0pt91MjR5BpgO9L8F6PN" crossorigin="anonymous"></script>
+    </body>
 </html>
