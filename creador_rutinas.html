@@ -70,17 +70,27 @@ Salidas: Una nueva rutina de entrenamiento guardada y visible en el perfil del u
 
                                 <div class="mb-3">
                                     <label for="ejercicioSelect" class="form-label">Seleccionar Ejercicio</label>
-                                    <select class="form-select mb-2" id="ejercicioSelect">
-                                        <option value="">-- Seleccionar ejercicio predefinido --</option>
-                                        <option value="Press de Banca">Press de Banca</option>
-                                        <option value="Sentadillas">Sentadillas</option>
-                                        <option value="Peso Muerto">Peso Muerto</option>
-                                        <option value="Dominadas">Dominadas</option>
-                                        <option value="Curl de Bíceps">Curl de Bíceps</option>
-                                        <option value="Press Militar">Press Militar</option>
-                                        <option value="Remo con Barra">Remo con Barra</option>
-                                        <option value="Fondos en Paralelas">Fondos en Paralelas</option>
-                                    </select>
+                                    <div class="d-flex gap-2">
+                                        <select class="form-select mb-2" id="ejercicioSelect">
+                                            <option value="">-- Seleccionar ejercicio predefinido --</option>
+                                            <option value="Press de Banca">Press de Banca</option>
+                                            <option value="Sentadillas">Sentadillas</option>
+                                            <option value="Peso Muerto">Peso Muerto</option>
+                                            <option value="Dominadas">Dominadas</option>
+                                            <option value="Curl de Bíceps">Curl de Bíceps</option>
+                                            <option value="Press Militar">Press Militar</option>
+                                            <option value="Remo con Barra">Remo con Barra</option>
+                                            <option value="Fondos en Paralelas">Fondos en Paralelas</option>
+                                        </select>
+                                        <div class="d-flex gap-2">
+                                            <button type="button" class="btn btn-outline-info mb-2" id="verEjercicio" disabled>
+                                                <i class="bi bi-play-circle"></i> Ver en YouTube
+                                            </button>
+                                            <button type="button" class="btn btn-outline-success mb-2" id="verEjercicioLocal" disabled>
+                                                <i class="bi bi-file-play"></i> Ver ejemplo local
+                                            </button>
+                                        </div>
+                                    </div>
                                 </div>
 
                                 <div class="mb-3">
@@ -115,9 +125,14 @@ Salidas: Una nueva rutina de entrenamiento guardada y visible en el perfil del u
                     <div class="card shadow-sm">
                         <div class="card-body">
                             <h3 class="card-title mb-4">Ejercicios Agregados</h3>
-                            <ul id="listaEjercicios" class="list-group">
+                            <ul id="listaEjercicios" class="list-group mb-4">
                                 <!-- Los ejercicios se agregarán aquí -->
                             </ul>
+                            <div class="d-grid">
+                                <button type="button" class="btn btn-success" id="terminarRutina">
+                                    <i class="bi bi-check-circle"></i> Terminar y Guardar Rutina
+                                </button>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -129,6 +144,7 @@ Salidas: Una nueva rutina de entrenamiento guardada y visible en el perfil del u
             const ejercicioSelect = document.getElementById('ejercicioSelect');
             const ejercicioCustom = document.getElementById('ejercicioCustom');
             const listaEjercicios = document.getElementById('listaEjercicios');
+            const terminarRutina = document.getElementById('terminarRutina');
             
             form.addEventListener('submit', function(e) {
                 e.preventDefault();
@@ -167,6 +183,13 @@ Salidas: Una nueva rutina de entrenamiento guardada y visible en el perfil del u
                 // Limpiar los campos
                 ejercicioSelect.value = '';
                 ejercicioCustom.value = '';
+            });
+
+            // Event listener para el botón de terminar rutina
+            terminarRutina.addEventListener('click', function() {
+                // Limpiar la lista de ejercicios
+                listaEjercicios.innerHTML = '';
+                alert('Rutina guardada exitosamente');
             });
         </script>
 

@@ -1,0 +1,69 @@
+{
+    "rutinas": {
+        "Rutina Full Body": {
+            "Dia 1": {
+                "Press de Banca": {
+                    "Sets": 3,
+                    "Repeticiones": 12,
+                    "Descanso": 90
+                },
+                "Sentadillas": {
+                    "Sets": 4,
+                    "Repeticiones": 10,
+                    "Descanso": 120
+                },
+                "Dominadas": {
+                    "Sets": 3,
+                    "Repeticiones": 8,
+                    "Descanso": 90
+                },
+                "Peso Muerto": {
+                    "Sets": 5,
+                    "Repeticiones": 5,
+                    "Descanso": 180
+                },
+                "Press Militar": {
+                    "Sets": 3,
+                    "Repeticiones": 12,
+                    "Descanso": 60
+                }
+            }
+        },
+        "Bro Split": {
+            "Dia 1": {
+                "Press de Banca": {
+                    "Sets": 4,
+                    "Repeticiones": 10,
+                    "Descanso": 90
+                },
+                "Press Militar": {
+                    "Sets": 3,
+                    "Repeticiones": 12,
+                    "Descanso": 60
+                },
+                "Fondos en Paralelas": {
+                    "Sets": 3,
+                    "Repeticiones": 12,
+                    "Descanso": 60
+                }
+            },
+            "Dia 2": {
+                "Peso Muerto": {
+                    "Sets": 5,
+                    "Repeticiones": 5,
+                    "Descanso": 180
+                },
+                "Remo con Barra": {
+                    "Sets": 4,
+                    "Repeticiones": 10,
+                    "Descanso": 90
+                },
+                "Curl de Bíceps": {
+                    "Sets": 3,
+                    "Repeticiones": 15,
+                    "Descanso": 60
+                }
+            }
+        }
+    }
+}

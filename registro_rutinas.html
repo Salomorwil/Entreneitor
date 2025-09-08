@@ -1,48 +1,34 @@
 <!DOCTYPE html>
-<!-- 
-ID del Requerimiento: RF-003
-Descripción: El sistema debe permitir a los usuarios visualizar las rutinas que tienen asignadas y registrar el progreso de cada sesión de entrenamiento (ej. peso levantado, repeticiones completadas).
-Entradas:
-Datos del ejercicio realizado (peso, repeticiones, series, notas).
-Selección de la fecha del entrenamiento.
-Proceso:
-El usuario navega a la sección "Mi Rutina" o "Calendario".
-El sistema muestra la rutina programada para el día.
-El usuario introduce los datos de su rendimiento para cada ejercicio completado.
-El sistema guarda esta información como un registro histórico asociado a la fecha.
-Salidas: Un registro de entrenamiento guardado. Actualización de las estadísticas de progreso del usuario.
--->
-<!--
-ID del Requerimiento: RF-007
-Descripción: El sistema debe proporcionar una interfaz para que los entrenadores puedan ver el progreso de los clientes que han contratado sus servicios. Esta vista debe mostrar los registros de entrenamiento del cliente en modo de solo lectura para facilitar los "check-ins".
-Entradas: Selección del cliente por parte del entrenador.
-Proceso:
-El entrenador inicia sesión y accede a su panel de "Mis Clientes".
-Selecciona un cliente de su lista.
-El sistema muestra el historial de registros de entrenamiento del cliente (datos de RF-003).
-El entrenador puede ver el rendimiento, pero no puede modificar los registros del cliente.
-Salidas: Visualización del historial de entrenamiento y progreso de un cliente específico.
--->
-
-<script>
-
-</script>
-
-<html>
-
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="stylesheet" href="assets/styles.css">
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-LN+7fdVzj6u52u30Kp6M/trliBMCMKTyK833zpbD+pXdCLuTusPj697FH4R/5mcr" crossorigin="anonymous">
-        <title>Entreneitor</title>
-    </head>
-
-    <body>
-        <nav class="navbar navbar-expand-lg bg-white shadow-sm">
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="assets/styles.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    <title>Registro de Rutinas - Entreneitor</title>
+    <style>
+        .completed {
+            background-color: #d4edda !important;
+            border-color: #c3e6cb !important;
+        }
+        .exercise-card {
+            transition: all 0.3s ease;
+        }
+        .last-workout {
+            border-left: 4px solid #0d6efd;
+        }
+        .table-success {
+            background-color: #d1e7dd !important;
+        }
+    </style>
+</head>
+<body class="bg-light">
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg bg-white shadow-sm">
         <div class="container">
             <a class="navbar-brand fw-bold" href="index.html">Entreneitor</a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
@@ -51,7 +37,7 @@ Salidas: Visualización del historial de entrenamiento y progreso de un cliente 
                         <a class="nav-link" href="creador_rutinas.html">Generador de rutinas</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="registro_rutinas.html">Seguimiento de rutinas</a>
+                        <a class="nav-link active" href="registro_rutinas.html">Seguimiento de rutinas</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="seleccion_entrenadores.html">Entrenadores</a>
@@ -61,6 +47,399 @@ Salidas: Visualización del historial de entrenamiento y progreso de un cliente 
                     <a href="registro_usuario.html" class="btn btn-outline-dark">Iniciar sesión</a>
                     <a href="registro_usuario.html" class="btn btn-dark">Regístrate</a>
                 </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Contenido principal -->
+    <div class="container mt-5">
+        <div class="row">
+            <!-- Selector de rutina y día -->
+            <div class="col-lg-4">
+                <div class="card shadow-sm mb-4">
+                    <div class="card-body">
+                        <h3 class="card-title mb-4">Seleccionar Rutina</h3>
+                        <form id="selectorForm">
+                            <div class="mb-3">
+                                <label for="rutinaSelect" class="form-label">Rutina</label>
+                                <select class="form-select" id="rutinaSelect" required>
+                                    <option value="">Selecciona una rutina</option>
+                                </select>
+                            </div>
+                            
+                            <div class="mb-3">
+                                <label for="diaSelect" class="form-label">Día</label>
+                                <select class="form-select" id="diaSelect" required>
+                                    <option value="">Selecciona un día</option>
+                                </select>
+                            </div>
+
+                            <div class="mb-3">
+                                <label class="form-label d-block">Modo de visualización</label>
+                                <div class="btn-group w-100" role="group">
+                                    <input type="radio" class="btn-check" name="modoVista" id="modoTarjeta" value="tarjeta" checked>
+                                    <label class="btn btn-outline-primary" for="modoTarjeta">
+                                        <i class="bi bi-card-text"></i> Tarjetas
+                                    </label>
+                                    
+                                    <input type="radio" class="btn-check" name="modoVista" id="modoTabla" value="tabla">
+                                    <label class="btn btn-outline-primary" for="modoTabla">
+                                        <i class="bi bi-table"></i> Tabla
+                                    </label>
+                                </div>
+                            </div>
+
+                            <div class="d-grid">
+                                <button type="submit" class="btn btn-primary">
+                                    <i class="bi bi-play-fill"></i> Comenzar entrenamiento
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Área de ejercicios -->
+            <div class="col-lg-8">
+                <div id="ejerciciosContainer">
+                    <div class="alert alert-info">
+                        Selecciona una rutina y un día para comenzar tu entrenamiento.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Template para vista de tarjeta -->
+    <template id="cardTemplate">
+        <div class="card shadow-sm mb-4 exercise-card">
+            <div class="card-body">
+                <div class="d-flex justify-content-between align-items-start mb-3">
+                    <h4 class="card-title mb-0"></h4>
+                    <div class="form-check form-switch">
+                        <input class="form-check-input" type="checkbox" role="switch">
+                        <label class="form-check-label">Completado</label>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <form class="exercise-form">
+                            <div class="mb-3">
+                                <label class="form-label">Peso (kg)</label>
+                                <input type="number" class="form-control" name="peso" required>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">Series completadas</label>
+                                <input type="number" class="form-control" name="series" required>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">Repeticiones por serie</label>
+                                <input type="number" class="form-control" name="repeticiones" required>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">Notas</label>
+                                <textarea class="form-control" name="notas" rows="2"></textarea>
+                            </div>
+                            <button type="submit" class="btn btn-sm btn-primary">Guardar registro</button>
+                        </form>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="last-workout p-3 bg-light rounded h-100">
+                            <h5 class="mb-3">Último registro</h5>
+                            <div class="last-workout-details">
+                                <p class="text-muted">No hay registros anteriores.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </template>
+
+    <!-- Scripts -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Datos incrustados
+            const rutinasData = {
+                "rutinas": {
+                    "Rutina Full Body": {
+                        "Dia 1": {
+                            "Press de Banca": { "Sets": 3, "Repeticiones": 12, "Descanso": 90 },
+                            "Sentadillas": { "Sets": 4, "Repeticiones": 10, "Descanso": 120 },
+                            "Dominadas": { "Sets": 3, "Repeticiones": 8, "Descanso": 90 },
+                            "Peso Muerto": { "Sets": 5, "Repeticiones": 5, "Descanso": 180 },
+                            "Press Militar": { "Sets": 3, "Repeticiones": 12, "Descanso": 60 }
+                        }
+                    },
+                    "Bro Split": {
+                        "Dia 1": {
+                            "Press de Banca": { "Sets": 4, "Repeticiones": 10, "Descanso": 90 },
+                            "Press Militar": { "Sets": 3, "Repeticiones": 12, "Descanso": 60 },
+                            "Fondos en Paralelas": { "Sets": 3, "Repeticiones": 12, "Descanso": 60 }
+                        },
+                        "Dia 2": {
+                            "Peso Muerto": { "Sets": 5, "Repeticiones": 5, "Descanso": 180 },
+                            "Remo con Barra": { "Sets": 4, "Repeticiones": 10, "Descanso": 90 },
+                            "Curl de Bíceps": { "Sets": 3, "Repeticiones": 15, "Descanso": 60 }
+                        }
+                    }
+                }
+            };
+
+            const registrosCsvData = `fecha,rutina,dia,ejercicio,peso,series_completadas,repeticiones_completadas,notas
+2025-09-01,Bro Split,Dia 1,Press de Banca,80,4,10,Buena técnica
+2025-09-01,Bro Split,Dia 1,Press Militar,40,3,12,Hombro un poco incómodo
+2025-09-01,Bro Split,Dia 1,Fondos en Paralelas,0,3,12,Sin peso adicional
+2025-09-02,Bro Split,Dia 2,Peso Muerto,120,5,5,Forma correcta
+2025-09-02,Bro Split,Dia 2,Remo con Barra,70,4,10,Grip mejorado
+2025-09-02,Bro Split,Dia 2,Curl de Bíceps,25,3,15,Buena conexión
+2025-09-07,Bro Split,Dia 1,Press de Banca,82.5,4,10,Aumenté peso
+2025-09-07,Bro Split,Dia 1,Press Militar,42.5,3,12,Mejor que la semana pasada
+2025-09-07,Bro Split,Dia 1,Fondos en Paralelas,10,3,12,Agregué peso
+2025-09-08,Bro Split,Dia 2,Peso Muerto,125,5,5,PR nuevo
+2025-09-08,Bro Split,Dia 2,Remo con Barra,72.5,4,10,Forma perfecta
+2025-09-08,Bro Split,Dia 2,Curl de Bíceps,27.5,3,15,Bomba increíble`;
+
+            // Almacenamiento en memoria de los registros de la sesión actual
+            const registrosSesion = new Map();
+
+            // Función para obtener las rutinas desde los datos incrustados
+            function cargarRutinas() {
+                return rutinasData.rutinas;
+            }
+
+            // Función para obtener el último registro desde los datos CSV incrustados
+            function cargarUltimoRegistro(rutina, dia, ejercicio) {
+                try {
+                    const rows = registrosCsvData.trim().split('\n').slice(1);
+                    
+                    const registrosCoincidentes = rows
+                        .map(row => row.split(','))
+                        .filter(row => row.length >= 8 && row[1] === rutina && row[2] === dia && row[3] === ejercicio)
+                        .sort((a, b) => new Date(b[0]) - new Date(a[0]));
+
+                    if (registrosCoincidentes.length > 0) {
+                        const [fecha, , , , peso, series, repeticiones, notas] = registrosCoincidentes[0];
+                        return { fecha, peso, series, repeticiones, notas };
+                    }
+                    return null;
+                } catch (error) {
+                    console.error('Error al procesar datos CSV:', error);
+                    return null;
+                }
+            }
+            
+            // ... (el resto del código JavaScript permanece igual) ...
+            
+            // Función para guardar registro en memoria
+            function guardarRegistro(rutina, dia, ejercicio, datos) {
+                const key = `${rutina}-${dia}-${ejercicio}`;
+                registrosSesion.set(key, {
+                    ...datos,
+                    fecha: new Date().toISOString().split('T')[0],
+                    completado: true
+                });
+            }
+
+            // Función para crear una tarjeta de ejercicio
+            function crearTarjetaEjercicio(ejercicio, datosEjercicio, ultimoRegistro) {
+                const template = document.getElementById('cardTemplate');
+                const card = template.content.cloneNode(true);
+                
+                card.querySelector('.card-title').textContent = ejercicio;
+                
+                const form = card.querySelector('.exercise-form');
+                const checkbox = card.querySelector('.form-check-input');
+                const cardElement = card.querySelector('.exercise-card');
+
+                form.addEventListener('submit', (e) => {
+                    e.preventDefault();
+                    const formData = new FormData(form);
+                    const datos = {
+                        peso: formData.get('peso'),
+                        series: formData.get('series'),
+                        repeticiones: formData.get('repeticiones'),
+                        notas: formData.get('notas')
+                    };
+                    
+                    guardarRegistro(rutinaSelect.value, diaSelect.value, ejercicio, datos);
+                    
+                    cardElement.classList.add('completed');
+                    checkbox.checked = true;
+                    
+                    const detallesContainer = cardElement.querySelector('.last-workout-details');
+                    detallesContainer.innerHTML = `
+                        <p class="mb-2"><strong>Fecha:</strong> ${new Date().toLocaleDateString()}</p>
+                        <p class="mb-2"><strong>Peso:</strong> ${datos.peso} kg</p>
+                        <p class="mb-2"><strong>Series:</strong> ${datos.series}</p>
+                        <p class="mb-2"><strong>Repeticiones:</strong> ${datos.repeticiones}</p>
+                        <p class="mb-0"><strong>Notas:</strong> ${datos.notas || 'N/A'}</p>
+                    `;
+                    alert('Registro guardado en la sesión actual.');
+                });
+
+                checkbox.addEventListener('change', () => {
+                    if (checkbox.checked) {
+                        cardElement.classList.add('completed');
+                    } else {
+                        cardElement.classList.remove('completed');
+                    }
+                });
+
+                if (ultimoRegistro) {
+                    const detallesContainer = card.querySelector('.last-workout-details');
+                    detallesContainer.innerHTML = `
+                        <p class="mb-2"><strong>Fecha:</strong> ${ultimoRegistro.fecha}</p>
+                        <p class="mb-2"><strong>Peso:</strong> ${ultimoRegistro.peso} kg</p>
+                        <p class="mb-2"><strong>Series:</strong> ${ultimoRegistro.series}</p>
+                        <p class="mb-2"><strong>Repeticiones:</strong> ${ultimoRegistro.repeticiones}</p>
+                        <p class="mb-0"><strong>Notas:</strong> ${ultimoRegistro.notas || 'N/A'}</p>
+                    `;
+                }
+
+                return card;
+            }
+
+            // Función para crear vista de tabla
+            function crearVistaTabla(ejercicios, ultimosRegistros) {
+                const tableContainer = document.createElement('div');
+                tableContainer.className = 'card shadow-sm';
+                const bodyRows = Object.entries(ejercicios).map(([ejercicio, datos]) => {
+                    const ultimo = ultimosRegistros[ejercicio];
+                    return `
+                        <tr>
+                            <td>${ejercicio}</td>
+                            <td><input type="number" class="form-control form-control-sm" name="peso" value="${ultimo?.peso || ''}"></td>
+                            <td><input type="number" class="form-control form-control-sm" name="series" value="${datos.Sets}"></td>
+                            <td><input type="number" class="form-control form-control-sm" name="reps" value="${datos.Repeticiones}"></td>
+                            <td><input type="text" class="form-control form-control-sm" name="notas"></td>
+                            <td>${ultimo ? `${ultimo.peso}kg × ${ultimo.series} × ${ultimo.repeticiones}` : 'N/A'}</td>
+                            <td>
+                                <div class="form-check form-switch">
+                                    <input class="form-check-input" type="checkbox" role="switch">
+                                </div>
+                            </td>
+                        </tr>
+                    `;
+                }).join('');
+
+                tableContainer.innerHTML = `
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table table-striped">
+                                <thead>
+                                    <tr>
+                                        <th>Ejercicio</th>
+                                        <th>Peso (kg)</th>
+                                        <th>Series</th>
+                                        <th>Reps</th>
+                                        <th>Notas</th>
+                                        <th>Último registro</th>
+                                        <th>Estado</th>
+                                    </tr>
+                                </thead>
+                                <tbody>${bodyRows}</tbody>
+                            </table>
+                        </div>
+                        <button id="guardarTablaBtn" class="btn btn-primary mt-3">Guardar todos los registros</button>
+                    </div>
+                `;
+
+                tableContainer.querySelector('#guardarTablaBtn').addEventListener('click', () => {
+                    const rows = tableContainer.querySelectorAll('tbody tr');
+                    let guardados = 0;
+                    rows.forEach(row => {
+                        const checkbox = row.querySelector('input[type="checkbox"]');
+                        if (checkbox.checked) {
+                            const ejercicio = row.cells[0].textContent;
+                            const datos = {
+                                peso: row.querySelector('[name="peso"]').value,
+                                series: row.querySelector('[name="series"]').value,
+                                repeticiones: row.querySelector('[name="reps"]').value,
+                                notas: row.querySelector('[name="notas"]').value
+                            };
+                            guardarRegistro(rutinaSelect.value, diaSelect.value, ejercicio, datos);
+                            row.classList.add('table-success');
+                            guardados++;
+                        }
+                    });
+                    if (guardados > 0) {
+                        alert(`${guardados} registro(s) guardado(s) en la sesión actual.`);
+                    } else {
+                        alert('Marca al menos un ejercicio como completado para guardar.');
+                    }
+                });
+
+                return tableContainer;
+            }
+
+            // Inicializar formulario y listeners
+            function inicializar() {
+                const rutinas = cargarRutinas();
+                const rutinaSelect = document.getElementById('rutinaSelect');
+                const diaSelect = document.getElementById('diaSelect');
+                const selectorForm = document.getElementById('selectorForm');
+                const ejerciciosContainer = document.getElementById('ejerciciosContainer');
+
+                for (const nombreRutina in rutinas) {
+                    rutinaSelect.add(new Option(nombreRutina, nombreRutina));
+                }
+
+                rutinaSelect.addEventListener('change', () => {
+                    const rutina = rutinas[rutinaSelect.value];
+                    diaSelect.innerHTML = '<option value="">Selecciona un día</option>';
+                    if (rutina) {
+                        for (const dia in rutina) {
+                            diaSelect.add(new Option(dia, dia));
+                        }
+                    }
+                });
+
+                selectorForm.addEventListener('submit', (e) => {
+                    e.preventDefault();
+                    const rutina = rutinaSelect.value;
+                    const dia = diaSelect.value;
+                    const modoVista = document.querySelector('input[name="modoVista"]:checked').value;
+                    
+                    if (!rutina || !dia) return;
+
+                    const ejercicios = rutinas[rutina][dia];
+                    ejerciciosContainer.innerHTML = '<div class="text-center"><div class="spinner-border" role="status"><span class="visually-hidden">Loading...</span></div></div>';
+                    
+                    const ultimosRegistros = {};
+                    for (const ejercicio in ejercicios) {
+                        ultimosRegistros[ejercicio] = cargarUltimoRegistro(rutina, dia, ejercicio);
+                    }
+
+                    ejerciciosContainer.innerHTML = '';
+
+                    if (modoVista === 'tarjeta') {
+                        for (const [ejercicio, datos] of Object.entries(ejercicios)) {
+                            const tarjeta = crearTarjetaEjercicio(ejercicio, datos, ultimosRegistros[ejercicio]);
+                            ejerciciosContainer.appendChild(tarjeta);
+                        }
+                    } else {
+                        const tabla = crearVistaTabla(ejercicios, ultimosRegistros);
+                        ejerciciosContainer.appendChild(tabla);
+                    }
+                });
+
+                document.querySelectorAll('input[name="modoVista"]').forEach(input => {
+                    input.addEventListener('change', () => {
+                        if (rutinaSelect.value && diaSelect.value) {
+                            selectorForm.dispatchEvent(new Event('submit'));
+                        }
+                    });
+                });
+            }
+
+            inicializar();
+        });
+    </script>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
             </div>
         </div>
     </nav>
